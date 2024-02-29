@@ -49,6 +49,7 @@ header nav{
     width: 100%;
     height: 10%;
     background: linear-gradient(to bottom, rgb(0, 0, 0), transparent);
+    backdrop-filter: blur(to bottom, 50%, transparent);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -227,24 +228,25 @@ header nav .search-box .search .card .cont span{
     font-weight: 500;
 }
 
-.home-img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    z-index: -1;
-    object-fit: cover;
-}
-
 .home-container{
+    /* top: 10%; */
+    top: 0;
     position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
+}
+
+.home-container .home-img{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
 }
 
 .home-container .content{
@@ -321,12 +323,13 @@ header nav .search-box .search .card .cont span{
 }
 
 .container{
-    padding-left: 3rem;
+    padding: 0 3rem 0;
 }
 
 .heading-title{
     padding-left: 3rem;
-    padding-top: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -337,8 +340,9 @@ header nav .search-box .search .card .cont span{
 .container .cards{
     position: relative;
     width: 100%;
-    height: 300px;
-    margin-top: 10px;
+    height: 330px;
+    margin-top: 1rem;
+    padding: 1rem;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -353,7 +357,7 @@ header nav .search-box .search .card .cont span{
     min-width: 150px;
     height: 70%;
     border-radius: 15px;
-    margin-right: 10px;
+    margin-left: 10px;
     background: #000;
     transition: .3s linear;
 }
@@ -411,38 +415,6 @@ header nav .search-box .search .card .cont span{
 .container .cards .card .cont .sub h3 i{
     margin-right: 3px;
 }
-
-/* .popular-container .bx-chevron-left, .bx-chevron-right{
-    position: absolute;
-    top: 30%;
-    left: 2%;
-    width: 25px;
-    height: 25px;
-    background: rgb(255, 255, 255, .3);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 12px;
-    cursor: pointer;
-    transition: .3s linear;
-    z-index: 999999999;
-    opacity: 0;
-}
-
-.popular-container .bx-chevron-right{
-    left: unset;
-    right: 2%;
-}
-
-.popular-container:hover .bx-chevron-right{
-    opacity: 1;
-}
-
-.popular-container:hover .bx-chevron-left{
-    opacity: 1;
-} */
 
 /* main{
     margin: auto;
