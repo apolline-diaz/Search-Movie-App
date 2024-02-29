@@ -2,155 +2,152 @@
 
 const API_KEY = 'api_key=4167b87055ac256fb149485d86ca5b86';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const upcoming_API_URL = BASE_URL + '/movie/upcoming?'+API_KEY;
-const popular_API_URL = BASE_URL + '/movie/popular?'+API_KEY;
-const topRated_API_URL = BASE_URL + '/movie/top_rated?'+API_KEY;
-const lgbt_API_URL = BASE_URL + '/discover/movie?'+API_KEY+'&language=en-US&sort_by=popularity.desc&page=1&with_keywords=158718';
-
-// keywor api url : 'https://api.themoviedb.org/3/search/keyword?api_key=4167b87055ac256fb149485d86ca5b86&query=lgbt'
-// -> Help  to find the keyword id of 'lgbt' which is : 158718
-// Then make an API request get/discover/movie : 
-// 'https://api.themoviedb.org/3/discover/movie?api_key=4167b87055ac256fb149485d86ca5b86&language=en-US&sort_by=popularity.desc&page=1&with_keywords=158718'
-
+const upcoming_API_URL = BASE_URL + '/movie/upcoming?' + API_KEY;
+const popular_API_URL = BASE_URL + '/movie/popular?' + API_KEY;
+const topRated_API_URL = BASE_URL + '/movie/top_rated?' + API_KEY;
+const lgbt_API_URL = BASE_URL + '/discover/movie?' + API_KEY + '&language=en-US&sort_by=popularity.desc&page=1&with_keywords=158718';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const searchURL = BASE_URL + '/search/movie?'+API_KEY;
+const searchURL = BASE_URL + '/search/movie?' + API_KEY;
 
 const upcoming = document.getElementById('upcoming');
 const popular = document.getElementById('popular');
 const topRated = document.getElementById('top-rated');
 const lgbt = document.getElementById('lgbt');
 
+async function fetchMovies(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('La requête n\'a pas abouti : ' + response.status);
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la récupération des films :', error);
+    throw error;
+  }
+}
 
-// const main = document.getElementById('main');
-// const form = document.getElementById('form');
-// const search = document.getElementById('search');
+async function displayMovies(container, data) {
+  container.innerHTML = '';
 
-// Popular Movies 
+  const cardsDiv = document.createElement('div');
+  cardsDiv.classList.add('cards');
 
+  data.forEach(movie => {
+    const {title, poster_path, vote_average, release_date} = movie;
+    const movieEl = document.createElement('div');
+    movieEl.classList.add('card');
+    movieEl.innerHTML = `
+      <img src="${IMG_URL + poster_path}" alt="${title}" class="poster">
+      <div class="cont">
+        <h4>${title}</h4>
+        <div class="sub">
+          <p>${release_date}</p>
+          <h3><span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
+        </div>
+      </div>
+    `;
+    cardsDiv.appendChild(movieEl);
+  });
+
+  container.appendChild(cardsDiv);
+}
+
+async function getPopularMovies(url) {
+  try {
+    const data = await fetchMovies(url);
+    console.log(data);
+    await displayMovies(popular, data);
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la récupération des films populaires :', error);
+  }
+}
+
+async function getTopRatedMovies(url) {
+  try {
+    const data = await fetchMovies(url);
+    console.log(data);
+    await displayMovies(topRated, data);
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la récupération des films les mieux notés :', error);
+  }
+}
+
+async function getLGBTMovies(url) {
+  try {
+    const data = await fetchMovies(url);
+    console.log(data);
+    await displayMovies(lgbt, data);
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la récupération des films LGBT :', error);
+  }
+}
+
+// Appels aux fonctions pour récupérer et afficher les films
 getPopularMovies(popular_API_URL);
-
-function getPopularMovies(url) {
-
-  fetch(url).then(res => res.json()).then(data => {
-    console.log(data.results);
-    showPopularMovies(data.results);
-  })
-}
-
-function showPopularMovies(data) {
-  popular.innerHTML = '';
-
-  const cardsDiv = document.createElement('div'); // Création de la div "cards" une seule fois
-  cardsDiv.classList.add('cards'); // Ajout de la classe "cards" à la div créée
-
-  data.forEach(movie => {
-    const {title, poster_path, vote_average, release_date} = movie;
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('card');
-    movieEl.innerHTML = `
-      <img src="${IMG_URL+poster_path}" alt="${title}" class="poster">
-      <div class="cont">
-        <h4>${title}</h4>
-        <div class="sub">
-          <p>${release_date}</p>
-          <h3><span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
-        </div>
-      </div>
-    `;
-    cardsDiv.appendChild(movieEl); // Ajout de la card au div "cards"
-  });
-
-  popular.appendChild(cardsDiv); // Ajout de la div "cards" contenant toutes les cards à l'élément avec l'id "popular"
-}
-
-// Top Rated Movies 
-
 getTopRatedMovies(topRated_API_URL);
-
-function getTopRatedMovies(url) {
-
-  fetch(url).then(res => res.json()).then(data => {
-    console.log(data.results);
-    showTopRatedMovies(data.results);
-  })
-}
-
-function showTopRatedMovies(data) {
-  topRated.innerHTML = '';
-
-  const cardsDiv = document.createElement('div'); // Création de la div "cards" une seule fois
-  cardsDiv.classList.add('cards'); // Ajout de la classe "cards" à la div créée
-
-  data.forEach(movie => {
-    const {title, poster_path, vote_average, release_date} = movie;
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('card');
-    movieEl.innerHTML = `
-      <img src="${IMG_URL+poster_path}" alt="${title}" class="poster">
-      <div class="cont">
-        <h4>${title}</h4>
-        <div class="sub">
-          <p>${release_date}</p>
-          <h3><span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
-        </div>
-      </div>
-    `;
-    cardsDiv.appendChild(movieEl); // Ajout de la card au div "cards"
-  });
-
-  topRated.appendChild(cardsDiv); // Ajout de la div "cards" contenant toutes les cards à l'élément avec l'id "popular"
-}
-
-// LGBT Movies 
-
 getLGBTMovies(lgbt_API_URL);
 
-function getLGBTMovies(url) {
+// Search Data Load
 
-  fetch(url).then(res => res.json()).then(data => {
-    console.log(data.results);
-    showLGBTMovies(data.results);
-  })
-}
+// let search = document.getElementsByClassName('search')[0];
+// let search_input = document.getElementById('search_input')[0];
 
-function showLGBTMovies(data) {
-  lgbt.innerHTML = '';
 
-  const cardsDiv = document.createElement('div'); // Création de la div "cards" une seule fois
-  cardsDiv.classList.add('cards'); // Ajout de la classe "cards" à la div créée
+// document.getElementById('title').innerText = data[0].title;
+// document.getElementById('genre').innerText = data[0].genre;
+// document.getElementById('release-date').innerText = data[0].release_date;
+// document.getElementById('vote-average').innerHTML = '<span>TMDB</span><i class='bx bxs-star'></i> ${data[0].vote_average}';
 
-  data.forEach(movie => {
-    const {title, poster_path, vote_average, release_date} = movie;
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('card');
-    movieEl.innerHTML = `
-      <img src="${IMG_URL+poster_path}" alt="${title}" class="poster">
-      <div class="cont">
-        <h4>${title}</h4>
-        <div class="sub">
-          <p>${release_date}</p>
-          <h3><span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
-        </div>
+// data.forEach(element => {
+//   let {title, poster_path, vote_average, release_date} = element;
+//   let card = document.createElement('a');
+//   card.classList.add('card');
+//   card.innerHTML = `
+//     <img src="${IMG_URL+poster_path}" alt="">
+//       <div class="cont">
+//         <h3>${title}</h3>
+//         <p>${genre},${release_date},<span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
+//       </div>    
+//     `
+//   search.appendChild(card);
+// });
+
+// Search Data Load
+
+/////////////////////////
+
+data.forEach(movie => {
+  const {title, poster_path, vote_average, release_date} = movie;
+  const movieEl = document.createElement('a');
+  movieEl.classList.add('card');
+  movieEl.innerHTML = `
+    <img src="${IMG_URL+poster_path}" alt="${title}">
+    <div class="cont">
+      <h4>${title}</h4>
+      <div class="sub">
+        <p>${release_date}</p>
+        <h3><span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
       </div>
-    `;
-    cardsDiv.appendChild(movieEl); // Ajout de la card au div "cards"
-  });
+    </div>
+  `;
+  cardsDiv.appendChild(movieEl); // Ajout de la card au div "cards"
+});
 
-  lgbt.appendChild(cardsDiv); // Ajout de la div "cards" contenant toutes les cards à l'élément avec l'id "popular"
-}
+//////////////////////////////////////////
 
-// Search
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+// form.addEventListener('submit', (e) => {
+//   e.preventDefault();
   
-  const searchTerm = search.value;
+//   const searchTerm = search.value;
 
-  if(searchTerm) {
-    getMovies(searchURL+'&query='+searchTerm)
-  }else{
-    getMovies(API_URL);
-  }
-})
+//   if(searchTerm) {
+//     getMovies(searchURL+'&query='+searchTerm)
+//   }else{
+//     getMovies(API_URL);
+//   }
+// })
 

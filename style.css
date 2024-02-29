@@ -179,7 +179,7 @@ header nav .search-box .search .card{
     margin-bottom: 5px;
     padding: 3px 0px;
     text-decoration: none;
-    display: none;
+    /* display: none; */
 }
 
 header nav .search-box .search .card::before{
@@ -222,10 +222,12 @@ header nav .search-box .search .card .cont p{
 
 header nav .search-box .search .card .cont span{
     background: yellow;
-    color: #000;
+    background: linear-gradient(70deg, #7cffc2, #297eff);
+    color: rgb(255, 255, 255);
     padding: 0px 3px;
     margin: 0px 5px 0px 10px;
     font-weight: 500;
+    border-radius: 2px;
 }
 
 .home-container{
@@ -336,6 +338,14 @@ header nav .search-box .search .card .cont span{
     font-size: 1rem;
     font-weight: 500;
 }
+
+/* 
+.horizontal-line{
+    margin-left: 3rem;
+    background-color: white;
+    width: 100%;
+    height: 1px;
+} */
 
 .container .cards{
     position: relative;
