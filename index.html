@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Queer Eye Database is a popular queer movie app made by Apolline Diaz">
-    <title>Queer Eye Database</title>
+    <title>Search Movie App</title>
     <!-- Font Awesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Custom CSS-->
@@ -12,7 +12,10 @@
     <!-- Fav Icon -->
     <link rel="shortcut icon" href="img/fav-icon.png" type="image/x-icon">
     <!-- Box Icons -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <!-- Link Swiper's JS-->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 </head>
 <body>
     <!-- Header -->
@@ -47,46 +50,105 @@
                 <!-- User -->
                 <img src="img/user.jpg" alt="" class="user-img">
                 <div class="search">
-                    <a href="#" class="card">
+                    <!-- <a href="#" class="card">
                         <img src="img/loveliesbleeding_poster.webp" alt="">
                         <div class="cont">
                             <h3>Love Lies Bleeding</h3>
                             <p>Drame, 2024, <span>TMDB</span><i class='bx bxs-star'></i> 9.6</p>
                         </div>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </nav>
     </header>
 
     <!-- Home -->
-    <section class="home-container">
-        <!-- Home Image -->
-        <img src="img/home-background.jpg" alt="" class="home-img">
-        <!-- Home Text -->
-        <div class="content">
-            <h1 id="title">Love Lies Bleeding</h1>
-            <p>Une histoire d'amour dans le monde du bodybuilding féminin.</p>
-            <div class="details">
-                <h5 id="gen">Drame</h5>
-                <h4>8 March 2024</h4>
-                <h3 id="rate"><img src="img/tmdb_logo.svg" alt="" class="tmdb-img"><i class='bx bxs-star'></i> 9.6</h3>
+    <section class="home_container" id="upcoming"> 
+        
+        <!-- Upcoming Section Start -->
+        <div class="upcoming-slider-wrapper" id="upcoming-slider">
+            <!-- radio buttons start -->
+            <input type="radio" name="radio-btn" id="radio1">
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <!-- radio buttons end -->
+            <!-- Box 1 -->
+            <div class="upcoming-card first" id="slide-1">
+                <img src="img/home-background.jpg" alt="" class="home-img">
+                <div class="content">
+                    <h1 id="title">Love Lies Bleeding</h1>
+                    <p>Lou (Kristen Stewart) and Jackie (Katy O’Brian) play queer bodybuilders in A24’s Love Lies Bleeding. The film was written and directed by Rose Glass.
+                    </p>
+                    <div class="details">
+                        <h5 id="gen">Drame</h5>
+                        <h4>March 8</h4>
+                        <h3 id="rate"><img src="img/tmdb_logo.svg" alt="" class="tmdb-img"><i class='bx bxs-star'></i> 9.6</h3>
+                    </div>
+                    <a href="https://youtu.be/BF_J3-DmiS0" class="watch-btn">
+                        <i class='bx bx-right-arrow' ></i>
+                        <span>Watch the trailer</span>
+                    </a>
+                </div>
             </div>
-            <a href="#" class="watch-btn">
-                <i class='bx bx-right-arrow' ></i>
-                <span>Watch the trailer</span>
-            </a>
+            <!-- Box 2 -->
+            <div class="upcoming-card" id="slide-2">
+                <img src="img/image2.png" alt="" class="home-img">
+                <div class="content">
+                    <h1 id="title">Challengers</h1>
+                    <p>In Challengers, Zendaya (Tashi Duncan) Josh O’Connor (Patrick), and Mike Faist (Art Donaldson) play a titillating love triangle in this Luca Guadagnino film about the world of tennis. We WILL be seated for this one!
+                    </p>
+                    <div class="details">
+                        <h5 id="gen">Drame</h5>
+                        <h4>April 25</h4>
+                        <h3 id="rate"><img src="img/tmdb_logo.svg" alt="" class="tmdb-img"><i class='bx bxs-star'></i> 9.6</h3>
+                    </div>
+                    <a href="https://youtu.be/MDnVk5jIJr0" class="watch-btn">
+                        <i class='bx bx-right-arrow' ></i>
+                        <span>Watch the trailer</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Box 3 -->
+            <div class="upcoming-card" id="slide-3">
+                <img src="img/image3.png" alt="" class="home-img">
+                <div class="content">
+                    <h1 id="title">Housekeeping For Beginners</h1>
+                    <p>This Macedonian film won the Queer Lion at the 2023 Venice Film Festival. It’s about a woman who never aspired to be a mother, but finds herself raising her girlfriends’ two daughters.
+                    </p>
+                    <div class="details">
+                        <h5 id="gen">Drame</h5>
+                        <h4>April 5</h4>
+                        <h3 id="rate"><img src="img/tmdb_logo.svg" alt="" class="tmdb-img"><i class='bx bxs-star'></i> 9.6</h3>
+                    </div>
+                    <a href="https://youtu.be/PeMlORxufuc" class="watch-btn">
+                        <i class='bx bx-right-arrow' ></i>
+                        <span>Watch the trailer</span>
+                    </a>
+                </div>
+            </div>
+            <!-- slide images end -->
+            <!-- automatic navigation start -->
+            <div class="navigation-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+            </div>
+            <!-- automatic navigation end -->
+        </div>
+        <!-- manual navigation start -->
+        <div class="navigation-manual">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
         </div>
     </section>
-    <!-- Home End -->
+    <!-- Upcoming Section End -->
 
     <!-- Popular Section Start -->
     <h2 class="heading-title">Popular</h2>
     <!-- <div class="horizontal-line"></div> -->
 
     <section class="container" id="popular">
-
-        <!-- Heading -->
         <!-- Movie Cards -->
         <div class="cards">
             <div class="card">
@@ -108,7 +170,6 @@
     <!-- <div class="horizontal-line"></div> -->
 
     <section class="container" id="top-rated">
-        <!-- Heading -->
         <!-- Movie Cards -->
         <div class="cards">
             <div class="card">
@@ -126,11 +187,10 @@
     <!-- Top Rated Section End -->
 
     <!-- LGBT Keyword Section Start -->
-    <h2 class="heading-title">Some movies from the alphabet... LGBTQIA+++</h2>
+    <h2 class="heading-title">Focus : LGBTQ+</h2>
 	<!-- <div class="horizontal-line"></div> -->
 
     <section class="container" id="lgbt">
-        <!-- Heading -->
         <!-- Movie Cards -->
         <div class="cards">
             <div class="card">
