@@ -62,12 +62,12 @@ header{
 header nav{
     width: 100%;
     height: 10%;
-    background: linear-gradient(to bottom, rgb(0, 0, 0), transparent);
-    backdrop-filter: blur(to bottom, 50%, transparent);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.769), transparent);
+    backdrop-filter: blur(1px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 3rem;
+    padding: 1rem 3rem;
 }
 
 header nav .logo_ul{
@@ -482,7 +482,8 @@ header nav .search-box .search .card .cont span{
     min-width: 150px;
     height: 70%;
     border-radius: 15px;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 20px;
     background: #000;
     transition: .3s linear;
 }
@@ -491,6 +492,7 @@ header nav .search-box .search .card .cont span{
     position: relative;
     width: 100%;
     height: 100%;
+    margin-bottom: 10px;
     border-radius: 8px;
     box-shadow: 0 0 2px rgba(255, 255, 255, 0.5); /* Ombre blanche avec une étendue de 10px */
 
@@ -603,3 +605,110 @@ header nav .search-box .search .card .cont span{
     transform:translateY(0);
 } */
 
+/* Popup */
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    transition: top 0ms ease-in-out 300ms;
+}
+
+.popup .overlay{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* backdrop-filter: blur(3px); */
+    opacity: 0;
+    transition: opacity 100ms ease-in-out 200ms;
+}
+
+.popup .popup-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1.15);
+    width: 95%;
+    max-width: 350px;
+    background: #00000052;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+}
+
+.popup .popup-content .img{
+    height: 75%;
+    width: 100%;
+}
+
+.popup .popup-content-details{
+    padding: 25px;
+}
+
+.popup .popup-content h2{
+    margin: 5px 0px;
+    font-size: 25px;
+    color: var(--text-color);
+    text-align: left;
+}
+
+.popup .popup-content p{
+    margin: 15px 0px;
+    font-size: 25px;
+    color: var(--text-color);
+    font-size: var(--fs-s);
+    text-align: left;
+}
+
+.popup .popup-content .controls{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px 0px;
+}
+
+.popup .popup-content .controls button{
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.popup .popup-content .controls .close-btn{
+    background: transparent;
+    color: #ed32c8;
+}
+
+.popup .popup-content .controls .submit-btn{
+    background: #ed32c8;
+    color: var(--text-color);
+}
+
+.popup.active{
+    top:0px;
+    transition: top 0ms ease-in-out 0ms;
+}
+
+.popup.active .overlay{
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+}
+
+.popup.active .popup-content{
+    transform: translate(-50%,-50%) scale(1);
+    opacity: 1;
+}

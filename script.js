@@ -19,8 +19,19 @@ const topRated = document.getElementById('top-rated');
 const lgbt = document.getElementById('lgbt');
 
 let genreMap = {};
-let upcomingData = {};
+let upcomingData = [];
 
+// Outils : Conversion date numérique en string
+
+function formatDate(dateString) {
+  const [year, month, day] = dateString.split('-'); // divise la chaîne de caractères en un tableau de sous-chaînes
+  const date = new Date(year, month - 1, day); // crée une nouvelle instance de l'objet Date
+  const options = { month: 'long', day: 'numeric', year: 'numeric' }; // définit les options de formatage
+  return date.toLocaleDateString('en-US', options); // renvoie la chaîne de caractères formatée
+}
+
+const releaseDate = "2024-03-08"; // exemple de chaîne de caractères représentant une date au format "AAAA-MM-JJ"
+const formattedDate = formatDate(releaseDate); // appelle la fonction formatDate avec la chaîne de caractères en argument
 
 // Fonction pour récupérer les noms de genres correspondants à leurs ID
 
@@ -56,7 +67,6 @@ async function fetchMovies(url) {
 }
 
 // Home Page : Image Slider 
-
 var counter = 1;
 setInterval(function(){
     document.getElementById('radio'+ counter).checked = true;
@@ -71,14 +81,6 @@ setInterval(() => {
   currentIndex = (currentIndex + 1) % upcomingData.length;
   displayUpcomingMovies(upcoming, [upcomingData[currentIndex]]);
 }, 5000); 
-
-// Conversion date numérique en string
-
-function dateToString () {
-  dt = new Date( 'release_date' );
-  month = dt.toLocaleString('default', { month: 'long' });
-  return (month + ' ' +  dt.getDate() + ', ' + dt.getFullYear())
-  }
 
 // Home Page : Upcoming Movies
 
@@ -111,7 +113,7 @@ async function displayUpcomingMovies(home_container, upcomingData) {
               <h5 id="gen">
               ${genre_ids.map(id => genreMap[id]).join(', ')}
               </h5>
-              <h4>${console.log(dateToString(release_date))}</h4>
+              <h4>${formatDate(release_date)}</h4>
               <h3 id="rate"><img src="img/tmdb_logo.svg" alt="" class="tmdb-img"><i class='bx bxs-star'></i> ${vote_average}</h3>
           </div>
             <a href="https://youtu.be/PeMlORxufuc" class="watch-btn">
@@ -130,12 +132,13 @@ async function displayUpcomingMovies(home_container, upcomingData) {
 
 getGenreNames();
 
-// attention au "data" car on en a plus
+// Attention au "data" car on en a plus
+
 async function getUpcomingMovies(url) {
   try {
     upcomingData = await fetchMovies(url);
     console.log(data);
-    await displayUpcomingMovies(upcoming, upcomingData.slice(0, 3)); // méthode slice pour récupérer seulement 3 films
+    await displayUpcomingMovies(upcoming, upcomingData.slice(2)); // méthode slice pour récupérer seulement 3 films
   } catch (error) {
     console.error('Une erreur s\'est produite lors de la récupération des films populaires :', error);
   }
@@ -160,7 +163,7 @@ async function displaySectionsMovies(container, data) {
       <div class="cont">
         <h4>${title}</h4>
         <div class="sub">
-          <p>${release_date}</p>
+          <p>${formatDate(release_date)}</p>
           <h3><span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
         </div>
       </div>
@@ -230,45 +233,22 @@ data.forEach(movie => {
   cardsDiv.appendChild(movieEl); // Ajout de la card au div "cards"
 });
 
-//////////////////////////////////////////
+// Création du pop up film
 
-// Search Data Load
+function createPopup(id){
+  let popupNode = document.querySelector(id);
+  let overlay = popupNode.querySelector(".overlay");
+  let closeBtn = popupNode.querySelector(".close-btn");
+  function openPopup(){
+    popupNode.classList.add("active");
+  }
+  function closePopup(){
+    popupNode.classList.remove("active");
+  }
+  overlay.addEvenlistener("click", closePopup);
+  closeBtn.addEvenlistener("click", closePopup);
+  return openPopup;
+}
 
-// let search = document.getElementsByClassName('search')[0];
-// let search_input = document.getElementById('search_input')[0];
-
-
-// document.getElementById('title').innerText = data[0].title;
-// document.getElementById('genre').innerText = data[0].genre;
-// document.getElementById('release-date').innerText = data[0].release_date;
-// document.getElementById('vote-average').innerHTML = '<span>TMDB</span><i class='bx bxs-star'></i> ${data[0].vote_average}';
-
-// data.forEach(element => {
-//   let {title, poster_path, vote_average, release_date} = element;
-//   let card = document.createElement('a');
-//   card.classList.add('card');
-//   card.innerHTML = `
-//     <img src="${IMG_URL+poster_path}" alt="">
-//       <div class="cont">
-//         <h3>${title}</h3>
-//         <p>${genre},${release_date},<span>TMDB</span><i class='bx bxs-star'></i> ${vote_average}</h3>
-//       </div>    
-//     `
-//   search.appendChild(card);
-// });
-
-//////////////////////////////////
-
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault();
-  
-//   const searchTerm = search.value;
-
-//   if(searchTerm) {
-//     getMovies(searchURL+'&query='+searchTerm)
-//   }else{
-//     getMovies(API_URL);
-//   }
-// })
-
-///////////////////////////////////////////
+let popup = createPopup("#popup");
+document.querySelector("#open-popup").addEventListener("click",popup);
