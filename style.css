@@ -62,8 +62,9 @@ header{
 header nav{
     width: 100%;
     height: 10%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.769), transparent);
-    backdrop-filter: blur(1px);
+    background: black;
+    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.769), transparent);
+    backdrop-filter: blur(1px); */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -85,7 +86,7 @@ header nav .logo_ul .logo{
     color: var(--text-color);
     justify-content: space-between;
     font-size: var(--fs-l);
-    font-weight: medium;
+    font-weight: bold;
 }
 
 header nav .logo_ul .logo span{
@@ -249,14 +250,20 @@ header nav .search-box .search .card .cont span{
 * Home : Upcoming 
 */
 
+#upcoming{
+    height: 100%;
+}
+
 .home_container{
     overflow: hidden;
 }
 
 .upcoming-slider-wrapper{
     position: relative;
-    width: 500%;
-    height: 500px;
+    width: 350%;
+    height: 100%;
+    /* width: 500%;
+    height: 500px; */
     display: flex;
     /* align-items: center; */
     /*     position: relative;
@@ -412,7 +419,9 @@ header nav .search-box .search .card .cont span{
 
 /* css for automatic navigation */
 
-.navigation-auto{
+/* A REPLACER POUR REFAIRE APPARAITRE LES RADIO */
+
+/* .navigation-auto{
     position: absolute;
     display: flex;
     width: 800px;
@@ -441,7 +450,7 @@ header nav .search-box .search .card .cont span{
 
 #radio3:checked ~ .navigation-auto .auto-btn3{
     background: white;
-}
+} JUSQUE LA!!!*/
 
 /*
 *   Home : Sections 
@@ -605,17 +614,17 @@ header nav .search-box .search .card .cont span{
     transform:translateY(0);
 } */
 
-/* Popup */
+/* popup_container */
 
-.center{
-    position: absolute;
+.popup_button{
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.popup{
-    position: fixed;
+.popup_container{
+    position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -623,7 +632,7 @@ header nav .search-box .search .card .cont span{
     transition: top 0ms ease-in-out 300ms;
 }
 
-.popup .overlay{
+.popup_container .overlay{
     position: absolute;
     top: 0px;
     left: 0px;
@@ -635,7 +644,7 @@ header nav .search-box .search .card .cont span{
     transition: opacity 100ms ease-in-out 200ms;
 }
 
-.popup .popup-content{
+.popup_container .popup_container-content{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -645,27 +654,27 @@ header nav .search-box .search .card .cont span{
     background: #00000052;
     backdrop-filter: blur(5px);
     border-radius: 20px;
-    opacity: 1;
+    opacity: 0;
     transition: all 300ms ease-in-out;
 }
 
-.popup .popup-content .img{
+.popup_container .popup_container-content .img{
     height: 75%;
     width: 100%;
 }
 
-.popup .popup-content-details{
+.popup_container .popup_container-content-details{
     padding: 25px;
 }
 
-.popup .popup-content h2{
+.popup_container .popup_container-content h2{
     margin: 5px 0px;
     font-size: 25px;
     color: var(--text-color);
     text-align: left;
 }
 
-.popup .popup-content p{
+.popup_container .popup_container-content p{
     margin: 15px 0px;
     font-size: 25px;
     color: var(--text-color);
@@ -673,13 +682,13 @@ header nav .search-box .search .card .cont span{
     text-align: left;
 }
 
-.popup .popup-content .controls{
+.popup_container .popup_container-content .controls{
     display: flex;
     justify-content: space-between;
     margin: 20px 0px 0px;
 }
 
-.popup .popup-content .controls button{
+.popup_container .popup_container-content .controls button{
     padding: 10px 20px;
     border: none;
     outline: none;
@@ -688,27 +697,27 @@ header nav .search-box .search .card .cont span{
     cursor: pointer;
 }
 
-.popup .popup-content .controls .close-btn{
+.popup_container .popup_container-content .controls .close-btn{
     background: transparent;
     color: #ed32c8;
 }
 
-.popup .popup-content .controls .submit-btn{
+.popup_container .popup_container-content .controls .submit-btn{
     background: #ed32c8;
     color: var(--text-color);
 }
 
-.popup.active{
+.popup_container.active{
     top:0px;
     transition: top 0ms ease-in-out 0ms;
 }
 
-.popup.active .overlay{
+.popup_container.active .overlay{
     opacity: 1;
     transition: all 300ms ease-in-out;
 }
 
-.popup.active .popup-content{
+.popup_container.active .popup_container-content{
     transform: translate(-50%,-50%) scale(1);
     opacity: 1;
 }
